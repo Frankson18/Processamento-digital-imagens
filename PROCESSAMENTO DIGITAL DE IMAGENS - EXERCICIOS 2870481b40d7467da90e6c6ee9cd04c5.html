@@ -1,0 +1,1105 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PROCESSAMENTO DIGITAL DE IMAGENS - EXERCICIOS </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f4e36535-8d5f-4ae9-a59c-cefbe363eaae" class="page sans"><header><h1 class="page-title">PROCESSAMENTO DIGITAL DE IMAGENS - EXERCICIOS </h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><h1 id="6709f8bd-dc5c-4ee2-9514-a080522659ab" class="block-color-blue_background">INTRODUÇÃO</h1><p id="94ca3f3e-27a3-446e-aca4-69a7a75ed285" class="">Resolução de exercicos para a materia de Processcamento Digital de Imagens da UFRN. Utilizando a biblioteca <code>OpenCV</code> na linguagem <code>C++</code>.</p><h1 id="e14c5a46-2aee-4923-891d-503156e4dbf9" class="block-color-blue_background">MANIPULANDO PIXEIS EM UMA IMAGEM</h1><h3 id="e6abd50e-dee6-4161-a1d0-d9102843872e" class="">EXERCÍCIO 1.1</h3><p id="ae89eff7-e9a0-4754-9a15-da45476c3597" class="">Utilizando o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/pixels.cpp">exemplos/pixels.cpp</a> como referência, implemente um programa <code>regions.cpp</code>. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1 e P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos pontos P1 e P2 será exibida com o negativo da imagem na região correspondente. </p><hr id="7a3fdf27-bf82-4efc-af7a-b963fe32111b"/><h3 id="b04a201c-a4a7-4986-80f2-ee020a09eef7" class="">SOLUÇÃO</h3><p id="a7187fa1-b13a-409e-a8ad-32be23c06eac" class="">Para resolver foi preciso implementar entradas para o usuario escolher qual região ele queria deixar em negativo. Para deixar deixar a região em negativo foi feito um <code>for</code> para percorrer area escolhida e fazer a operação <code>image.at&lt;uchar&gt;(i,j)=255 - image.at&lt;uchar&gt;(i,j);</code> que faz com que o pixel da imagem se torne negativo. </p><div id="c95767db-c049-4854-a90f-287e8ea8d580" class="column-list"><div id="6bfc06b0-5eae-434e-ab8d-73c336b06cef" style="width:50%" class="column"><figure id="2870481b-40d7-467d-a90e-6c6ee9cd04c5" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled.png"><img style="width:257px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled.png"/></a></figure></div><div id="dc40ad13-a06a-4ff8-923f-4cf44ae31a41" style="width:50%" class="column"><figure id="5f26a861-1bf7-4b42-8cf4-9b858c452164" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%201.png"><img style="width:253px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%201.png"/></a></figure></div></div><div id="d0bbf897-4fd3-4ab1-9a59-67b02845eb0b" class="column-list"><div id="3b3173a9-67bf-48dd-aa97-b748bcd03cca" style="width:50%" class="column"><figure id="704faa99-ad91-4934-8a84-454f47871297" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%202.png"><img style="width:255px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%202.png"/></a></figure></div><div id="0fb2f743-53ba-42d7-9c37-f306bf35e687" style="width:50%" class="column"><figure id="f06f074d-8dc0-4c39-ae59-5c31c9707d79" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%203.png"><img style="width:258px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%203.png"/></a></figure></div></div><pre id="5341ccad-4bed-4136-b364-8eff65070c6d" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int, char** argv){
+  Mat image;
+  int x1,y1,x2,y2;
+
+  namedWindow(&quot;Original&quot;,WINDOW_AUTOSIZE);
+  image = imread(argv[1],IMREAD_GRAYSCALE);
+
+  if(!image.data){
+    cout &lt;&lt; &quot;nao abriu bolhas.png&quot; &lt;&lt; std::endl;
+  }
+  imshow(&quot;Original&quot;, image);
+  waitKey();
+
+  cout &lt;&lt; &quot;Ditite as coordenadas do primeiro ponto: &quot;&lt;&lt;endl;
+  cin &gt;&gt; x1 &gt;&gt; y1;
+  cout &lt;&lt; &quot;Ditite as coordenadas do primeiro ponto: &quot;&lt;&lt;endl;
+  cin &gt;&gt; x2 &gt;&gt; y2; 
+  
+  //Verifica se os pontos são validos
+  if(x1!=x2 &amp;&amp; y1!=y2 &amp;&amp;x1&gt;=0 &amp;&amp; x2&lt;=image.rows &amp;&amp; y1&gt;=0 &amp;&amp; y2&lt;=image.rows){
+    //faz a o negativo da região escolhida
+    for(int i=x1;i&lt;x2;i++){
+      for(int j=y1;j&lt;y2;j++){
+        image.at&lt;uchar&gt;(i,j)=255 - image.at&lt;uchar&gt;(i,j);
+      }
+    }
+
+    namedWindow(&quot;Negativo&quot;, WINDOW_AUTOSIZE);
+    imshow(&quot;Negativo&quot;, image);
+    waitKey(); 
+       
+  }else{
+    cout&lt;&lt;&quot;coordenadas invalidas&quot;&lt;&lt;endl;
+  }
+
+  
+  return 0;
+}</code></pre><h3 id="75a57a87-831b-4cdf-8266-caa28a937477" class="">EXERCÍCIO 1.2 </h3><p id="6472f92e-2f99-4720-9dd0-9e05e423ef23" class="">Utilizando o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/pixels.cpp">exemplos/pixels.cpp</a> como referência, implemente um programa <code>trocaregioes.cpp</code>. Seu programa deverá trocar os quadrantes em diagonal na imagem. Explore o uso da classe Mat e seus construtores para criar as regiões que serão trocadas. O efeito é ilustrado na Figura 5. </p><hr id="45090dad-e33e-4fb9-a418-a20a054b2099"/><h3 id="b69f0fbc-4e44-4dbb-b9d6-8da01ce798a1" class="">SOLUÇÃO</h3><p id="b8fd9d5f-6e7a-4771-8208-e7a10ce6a95b" class="">Diferente do regions, esse agora não precisa de interação com o usuario, é simplesmente manipulação da imagem. E para fazer isso foi usado a classe <code>Mat</code> e as funções <code>Rect</code> para pegar pedaços da imagem e salva-los em uma matriz e o método <code>copyTo</code> para fazer a modificação na imagem atual, assim conseguindo modificar as areas da imagem.</p><div id="1389143d-1288-47b4-886f-a46d93659a3b" class="column-list"><div id="cae8920b-32f4-4251-b6bb-b59a0fcfa571" style="width:50%" class="column"><figure id="10fa9c79-eccc-4a57-bc72-fba50c806cce" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled.png"><img style="width:257px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled.png"/></a></figure></div><div id="fba350d9-0fb5-414c-99e9-9fb6ea3b68c2" style="width:50%" class="column"><figure id="cd7abf8b-43db-4592-a914-36962f4d7412" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%204.png"><img style="width:256px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%204.png"/></a></figure></div></div><pre id="cabba1c0-5cfb-4649-9d6e-6db71ebce020" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int, char** argv){
+  Mat image;
+
+  namedWindow(&quot;Original&quot;,WINDOW_AUTOSIZE);
+  image = imread(argv[1],IMREAD_GRAYSCALE);
+
+  if(!image.data){
+    cout &lt;&lt; &quot;nao abriu bolhas.png&quot; &lt;&lt; std::endl;
+  }
+  imshow(&quot;Original&quot;, image);
+  waitKey();
+
+  //recorte superior esquerdo da imagem
+  Mat rec1 = image(Rect(0,0,image.rows/2,image.cols/2)); 
+  //recorte superior direito da imagem
+  Mat rec2 = image(Rect(image.rows/2,0,image.rows/2,image.cols/2));
+  // recorte inferior esquerdo
+  Mat rec3 = image(Rect(0,image.cols/2,image.rows/2,image.cols/2));
+  // recorte inferior direito
+  Mat rec4 = image(Rect(image.rows/2,image.cols/2,image.rows/2,image.cols/2));
+
+  Mat troca(image.rows,image.cols,image.type());
+
+  // trocando inferior direito para o superior esquerdo
+  rec4.copyTo(troca(Rect(0,0,image.rows/2,image.cols/2)));
+  // trocando inferior esquerdo para o superior direito
+  rec3.copyTo(troca(Rect(image.rows/2,0,image.rows/2,image.cols/2)));
+  // trocando superior direito para inferior direito
+  rec2.copyTo(troca(Rect(0,image.cols/2,image.rows/2,image.cols/2)));
+  // trocando superior esquerdo para inferior direito 
+  rec1.copyTo(troca(Rect(image.rows/2,image.cols/2,image.rows/2,image.cols/2)));
+
+  namedWindow(&quot;regioes trocadas&quot;, WINDOW_AUTOSIZE);
+  imshow(&quot;regioes trocadas&quot;, troca);
+  waitKey();    
+  
+
+  
+  return 0;
+}</code></pre><hr id="445902d0-ce23-49f7-a6d2-e633f4f83e33"/><h1 id="80c11d0d-677f-4bc1-86f9-5bd0a04b39ee" class="block-color-blue_background">PREENCHENDO REGIÕES </h1><h3 id="beb774cd-bcdd-4f7a-a23f-687af3a1419f" class="">EXERCÍCIO 2.1</h3><p id="c6ccc5e3-c980-4d27-88cc-4c8dfeaaf538" class="">Observando-se o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/labeling.cpp">labeling.cpp</a> como exemplo, é possível verificar que caso existam mais de 255 objetos na cena, o processo de rotulação poderá ficar comprometido. Identifique a situação em que isso ocorre e proponha uma solução para este problema.</p><h3 id="d509f581-c02f-4284-9a9d-46257210c9bf" class="">SOLUÇÃO</h3><p id="49484c93-be1a-4860-a51c-a7a5a92da1e9" class="">Para resolver o problema de casos que a imagem tenha mais que 255 objetos a serem rotulados, podemos usar uma estrategia de fazer o rotulo ser decimal, ou rotula usando a operação mod de 255. </p><h3 id="9645bc27-373f-4b25-987a-9423b803be95" class="">EXERCÍCIO 2.2</h3><p id="ee162016-bc64-4840-86c7-a720e742bae7" class="">Aprimore o algoritmo de contagem apresentado para identificar regiões com ou sem buracos internos que existam na cena. Assuma que objetos com mais de um buraco podem existir. Inclua suporte no seu algoritmo para não contar bolhas que tocam as bordas da imagem. Não se pode presumir, a priori, que elas tenham buracos ou não.</p><h3 id="d46195d2-761c-46ae-8a0f-daa77b7fe607" class="">SOLUÇÃO</h3><p id="1de2d083-f507-4913-a90d-25f47a0406b1" class="">Para retirar as bolhas e buracos que esao nas bordas basta percorrer as bordas da imagem e quando acha um pixel com a cor do objeto usar o ponto como semente no <code>floodFill</code> para fazer com que a bolhas tenha a mesma tonalidade do fundo da imagem. Já para conta os buracos, usei uma estrategia de pinta o fundo da imagem de cinza usando o <code>floodFill</code> assim, a parte de dentro dos buracos ainda ficaria com a cor do fundo original e eu podeia conta agora quantos buracos tem. Sabendo a quantidade de buracos é só aplicar o <code>floodFill</code> na imagem, ver quantos objetos ele encontrou e dimunir do numero de buracos, assim nos temos a quantidade de bolhas e buracos. </p><figure id="1b01698d-9d78-44db-bdf1-99f8ce0667cb" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%205.png"><img style="width:736px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%205.png"/></a></figure><div id="ca996c82-c977-4877-9905-2b65ef45c820" class="column-list"><div id="896ef3fd-333f-41b1-bf41-2a56dfaef653" style="width:33.333333333333336%" class="column"><figure id="3ae3d665-5d90-4d4b-be3f-6f8b69884046" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%206.png"><img style="width:257px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%206.png"/></a></figure></div><div id="30415e01-442d-48d2-b71e-f35e80956da3" style="width:33.333333333333336%" class="column"><figure id="5be6b847-5600-4cff-9982-acb9762d6db4" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%207.png"><img style="width:256px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%207.png"/></a></figure></div><div id="2a904b08-024b-4c15-b3b6-aa0164e6282d" style="width:33.33333333333333%" class="column"><figure id="643df667-7c59-456d-a6c7-5b0f782495e1" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%208.png"><img style="width:255px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/Untitled%208.png"/></a></figure></div></div><pre id="d8379f92-1309-45d5-8502-202f54d1ced1" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+  Mat image, realce;
+  int width, height;
+  int nobjects;
+
+  Point p;
+  image = imread(argv[1], IMREAD_GRAYSCALE);
+
+  if (!image.data)
+  {
+    cout &lt;&lt; &quot;imagem nao carregou corretamente\n&quot;;
+    return (-1);
+  }
+
+  width = image.cols;
+  height = image.rows;
+
+  p.x = 0;
+  p.y = 0;
+
+  //excluindo objetos que tocam nas bordas superiores e inferiores
+  for (int i = 0; i &lt; height; i++)
+  {
+    if (image.at&lt;uchar&gt;(0,i) == 255)
+    {
+      p.x = i;
+      p.y = 0;
+      floodFill(image, p,0);
+    }
+    if (image.at&lt;uchar&gt;(width-1,i) == 255)
+    {
+      p.x = i;
+      p.y = width-1;
+      floodFill(image, p,0);
+    }
+  }
+
+  //excluindo objetos que tocam nas bordas laterais
+  for (int i = 0; i &lt; width; i++)
+  {
+    if (image.at&lt;uchar&gt;(i,0) == 255)
+    {
+      p.x = 0;
+      p.y = i;
+      floodFill(image, p,0);
+    }
+    if (image.at&lt;uchar&gt;(i,height-1) == 255)
+    {
+      p.x = height-1;
+      p.y = i;
+      floodFill(image, p,0);
+    }
+  }
+
+  imshow(&quot;objetos da bordas removidos&quot;, image);
+
+  //mudando a cor do backgrpund para pode identificar os buraco
+  p.x=0;
+  p.y=0;
+  floodFill(image,p,100);
+  imshow(&quot;bolhas&quot;, image);
+
+  // contando bolhas
+  int buracos = 0;
+  for (int i = 0; i &lt; height; i++)
+  {
+    for (int j = 0; j &lt; width; j++)
+    {
+      if (image.at&lt;uchar&gt;(i, j) == 0)
+      {
+        // achou um objeto
+        buracos++;
+        p.x = j;
+        p.y = i;
+        // preenche o objeto com o contador
+        floodFill(image, p, 255);
+      }
+    }
+  }
+  cout&lt;&lt;&quot;numero de buracos: &quot;&lt;&lt;buracos&lt;&lt;endl;
+
+  //rotulando todos os objetos
+  nobjects = 0;
+  for (int i = 0; i &lt; height; i++)
+  {
+    for (int j = 0; j &lt; width; j++)
+    {
+      if (image.at&lt;uchar&gt;(i, j) == 255)
+      {
+        // achou um objeto
+        nobjects++;
+        p.x = j;
+        p.y = i;
+        // preenche o objeto com o contador
+        floodFill(image, p, nobjects);
+      }
+    }
+  }
+
+  cout&lt;&lt;&quot;numero de bolhas: &quot;&lt;&lt;nobjects-buracos&lt;&lt;endl;
+
+  imshow(&quot;labeling&quot;, image);
+  imwrite(&quot;labeling.png&quot;, image);
+  waitKey();
+  return 0;
+}</code></pre><hr id="27781e4c-f3cf-485c-a4ea-082abba48b8d"/><h1 id="2d986151-b5bc-4216-b47e-a89363d16c5a" class="block-color-blue_background">MANIPULAÇÃO DE HISTOGRAMAS</h1><h3 id="e50afe33-2d87-4b49-9fcc-76492191dd12" class="">EXERCÍCO 3.1</h3><p id="aa28d69a-8b90-47ad-864f-73ca7e7547f5" class="">Utilizando o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/histogram.cpp">exemplos/histogram.cpp</a> como referência, implemente um programa <code>equalize.cpp</code>. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza. </p><h3 id="3bf6e91f-a77e-4c77-9d4a-dd56d33e4605" class="">SOLUÇÃO</h3><p id="a1dcd458-0839-4c53-afb6-34a235218474" class="">Para simular uma entrada em tons de cinza tive que para cinza usando a função <code>cvtColor</code>. Para fazer a equalização do histograma utiizei a função <code>equalizeHist</code>, logo depois fiz propriamente dito o hitrograma da imagem original e da equalizada, assim tendo uma comparação entre as duas. </p><figure id="b2b9528f-9728-4c6b-8236-3a302f5b8ef1" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker.gif"><img style="width:600px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker.gif"/></a></figure><pre id="7ab4444d-c740-49a8-99f3-f488d5afe147" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char** argv){
+  Mat image, icinza, iequalizado;
+  VideoCapture cap;
+  vector&lt;Mat&gt; planes;
+  Mat histcinza, histequalizado;
+  int nbins = 64;
+  float range[] = {0, 255};
+  const float *histrange = { range };
+  bool uniform = true;
+  bool acummulate = false;
+  int key;
+
+	cap.open(0);
+
+  if(!cap.isOpened()){
+    std::cout &lt;&lt; &quot;cameras indisponiveis&quot;;
+    return -1;
+  }
+
+  cap.set(CAP_PROP_FRAME_WIDTH, 640);
+  cap.set(CAP_PROP_FRAME_HEIGHT, 480);
+
+  int histw = nbins, histh = nbins/2;
+  Mat histImgcinza(histh, histw, CV_8UC1,Scalar(0));
+  Mat histImgequalizado(histh, histw, CV_8UC1,Scalar(0)); 
+
+  while(1){
+    cap &gt;&gt; image;
+    
+    //Convertendo para cinza
+    cvtColor(image,icinza,CV_BGR2GRAY);
+
+    //equalizando histograma
+    equalizeHist(icinza,iequalizado);
+
+    //calculando histograma imagem cinza original
+    calcHist(&amp;icinza, 1, 0,Mat(), histcinza, 1,
+                 &amp;nbins, &amp;histrange,
+                 uniform, acummulate);
+    // calculando histograma da imagem cinza equalizada
+    calcHist(&amp;iequalizado, 1, 0,Mat(),histequalizado, 1,
+                 &amp;nbins, &amp;histrange,
+                 uniform, acummulate);
+  
+    //normalizando
+    normalize(histcinza,histcinza, 0,histImgcinza.rows,NORM_MINMAX, -1,Mat());
+    normalize(histequalizado,histequalizado, 0, histImgequalizado.rows,NORM_MINMAX, -1,Mat());
+
+    histImgcinza.setTo(Scalar(0));
+    histImgequalizado.setTo(Scalar(0));
+
+    for(int i=0; i&lt;nbins; i++){
+      line(histImgcinza,
+               Point(i, histh),
+               Point(i, histh-cvRound(histcinza.at&lt;float&gt;(i))),
+               Scalar(255, 255, 255), 1, 8, 0);
+      line(histImgequalizado,
+               Point(i, histh),
+               Point(i, histh-cvRound(histequalizado.at&lt;float&gt;(i))),
+               Scalar(255, 255, 255), 1, 8, 0);
+    }
+
+    histImgcinza.copyTo(icinza(Rect(0,0,nbins, histh)));
+    histImgequalizado.copyTo(iequalizado(Rect(0,0,nbins, histh)));
+    
+    imshow(&quot;image cinza&quot;, icinza);
+    imshow(&quot;image cinza euqalizada&quot;, iequalizado);
+    key = waitKey(30);
+    if(key == 27) break;
+  }
+  return 0;
+}</code></pre><h3 id="7aaac245-dae3-4b0c-a88b-33d57b3c6d86" class="">EXERCÍCIO 3.2</h3><p id="1b6806ea-db36-4cdc-a55e-01f48d374c25" class="">Utilizando o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/histogram.cpp">exemplos/histogram.cpp</a> como referência, implemente um programa <code>motiondetector.cpp</code>. Este deverá continuamente calcular o histograma da imagem (apenas uma componente de cor é suficiente) e compará-lo com o último histograma calculado. Quando a diferença entre estes ultrapassar um limiar pré-estabelecido, ative um alarme. Utilize uma função de comparação que julgar conveniente. </p><h3 id="28826a6f-a7af-4e26-b2ec-5352f18452da" class="">SOLUÇÃO</h3><p id="0a34cced-64d4-474b-b70a-eaa2a81d735a" class="">Para solucionar esse exercício tiver que criar um histrograma que ficasse sempre salvando o ultimo histograma do ultimo frame e comparando com o hitograma mais recente. Para fazera comparação dos histogramas utilizei a função <code>compareHis</code> que me devolve a correlação entre os hitogramas, assim consigo criar um <code>if</code> e verificar se esse correção é alta ou baixar e criar um alerma em verda no canto inferior da tela, avisando que teve movimento.</p><figure id="d80c0e1e-bc93-444b-a69e-c8bb51e13141" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker_(1).gif"><img style="width:600px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker_(1).gif"/></a></figure><pre id="f27cbad5-2515-433b-a549-a18b70f6fb44" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+  Mat image;
+  VideoCapture cap;
+  vector&lt;Mat&gt; rgb;
+  Mat histR, histanterior;
+  int nbins = 64;
+  float range[] = {0, 255};
+  const float *histrange = {range};
+  bool uniform = true;
+  bool acummulate = false;
+  int key;
+
+  cap.open(0);
+
+  if (!cap.isOpened())
+  {
+    std::cout &lt;&lt; &quot;cameras indisponiveis&quot;;
+    return -1;
+  }
+
+  cap.set(CAP_PROP_FRAME_WIDTH, 640);
+  cap.set(CAP_PROP_FRAME_HEIGHT, 480);
+
+  int histw = nbins, histh = nbins / 2;
+  Mat histImgR(histh, histw, CV_8UC3, Scalar(0,0,0));
+
+  cap &gt;&gt; image;
+
+  split(image, rgb);
+
+  //calculando histograma imagem do canal vermelho
+  calcHist(&amp;rgb[0], 1, 0, Mat(), histR, 1,
+           &amp;nbins, &amp;histrange,
+           uniform, acummulate);
+
+  //normalizando
+  normalize(histR, histR, 0, histImgR.rows, NORM_MINMAX, -1, Mat());
+
+  while (1)
+  {
+    histR.copyTo(histanterior);
+
+    cap &gt;&gt; image;
+
+    split(image, rgb);
+
+    //calculando histograma imagem do canal vermelho
+    calcHist(&amp;rgb[0], 1, 0, Mat(), histR, 1,
+             &amp;nbins, &amp;histrange,
+             uniform, acummulate);
+
+    //normalizando
+    normalize(histR, histR, 0, histImgR.rows, NORM_MINMAX, -1, Mat());
+
+    histImgR.setTo(Scalar(0));
+
+    double correlacao = compareHist(histR, histanterior,CV_COMP_CORREL);
+
+    if(correlacao &lt; 0.99){
+      circle(image, Point(image.cols - 50, image.rows-50), 20, Scalar(0, 255, 0), CV_FILLED);
+    }
+
+    for(int i=0; i&lt;nbins; i++){
+      line(histImgR,
+               Point(i, histh),
+               Point(i, histh-cvRound(histR.at&lt;float&gt;(i))),
+               Scalar(255, 255, 255), 1, 8, 0);
+    }
+    histImgR.copyTo(image(Rect(0,0,nbins, histh)));
+
+    imshow(&quot;imagem&quot;, image);
+    key = waitKey(30);
+    if (key == 27)
+      break;
+  }
+  return 0;
+}</code></pre><hr id="5c9df2e3-47ac-449c-abed-da5c8c8eb199"/><h3 id="5775545e-630d-4b62-8d57-a321b7deeb68" class="">EXERCÍCIO 4</h3><p id="4ead568a-e2e4-4bbe-b6f8-1f2a3aa6361e" class="">Utilizando o programa <a href="https://agostinhobritojr.github.io/tutorial/pdi/exemplos/filtroespacial.cpp">exemplos/filtroespacial.cpp</a> como referência, implemente um programa <code>laplgauss.cpp</code>. O programa deverá acrescentar mais uma funcionalidade ao exemplo fornecido, permitindo que seja calculado o laplaciano do gaussiano das imagens capturadas. Compare o resultado desse filtro com a simples aplicação do filtro laplaciano.</p><h3 id="7d107616-9b98-4569-be48-0da565c13664" class="">SOLUÇÃO</h3><p id="fa622cb9-addf-4013-99b9-5da04d176f06" class="">Para solucionar foi simples, foi somente adicionar a mascasra do laplaciano do gaussiano junto as mascasras dos outros filtro e colocar a opção de escolher digitando a tecla <code>p</code>. Analizando o filtro laplaciano com o laplaciano do gaussiano percebisse uma acentuação dos contornos, deixnado a linda mais espessa e também mais contornos visiveis. No video foi primeiro aplicado o filtro laplaciano e depois o filtro laplaciano do gaussiano.</p><figure id="0f41f0f5-670b-4846-a3d9-aba693e5ed10" class="image"><a href="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker%201.gif"><img style="width:600px" src="PROCESSAMENTO%20DIGITAL%20DE%20IMAGENS%20-%20EXERCICIOS%202870481b40d7467da90e6c6ee9cd04c5/ezgif.com-gif-maker%201.gif"/></a></figure><pre id="ad47d279-30fe-4213-9704-31b0ca335641" class="code"><code>#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+void printmask(cv::Mat &amp;m) {
+  for (int i = 0; i &lt; m.size().height; i++) {
+    for (int j = 0; j &lt; m.size().width; j++) {
+      std::cout &lt;&lt; m.at&lt;float&gt;(i, j) &lt;&lt; &quot;,&quot;;
+    }
+    std::cout &lt;&lt; &quot;\n&quot;;
+  }
+}
+
+int main(int, char **) {
+  cv::VideoCapture cap;  // open the default camera
+  float media[] = {0.1111, 0.1111, 0.1111, 0.1111, 0.1111,
+                   0.1111, 0.1111, 0.1111, 0.1111};
+  float gauss[] = {0.0625, 0.125,  0.0625, 0.125, 0.25,
+                   0.125,  0.0625, 0.125,  0.0625};
+  float horizontal[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+  float vertical[] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+  float laplacian[] = {0, -1, 0, -1, 4, -1, 0, -1, 0};
+  float boost[] = {0, -1, 0, -1, 5.2, -1, 0, -1, 0};
+  float laplgauss [] ={0,0,-1,0,0,0,-1,-2,-1,0,-1,-2,16,-2,-1,
+                      0,-1,-2,-1,0,0,0,-1,0,0};
+
+  cv::Mat frame, framegray, frame32f, frameFiltered;
+  cv::Mat mask(3, 3, CV_32F), mask_scale;
+  cv::Mat result;
+  double width, height;
+  int absolut;
+  char key;
+
+  cap.open(0);
+
+  if (!cap.isOpened())  // check if we succeeded
+    return -1;
+
+  cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+  cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+  width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+  height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+  std::cout &lt;&lt; &quot;largura=&quot; &lt;&lt; width &lt;&lt; &quot;\n&quot;;
+  ;
+  std::cout &lt;&lt; &quot;altura =&quot; &lt;&lt; height &lt;&lt; &quot;\n&quot;;
+  ;
+  std::cout &lt;&lt; &quot;fps    =&quot; &lt;&lt; cap.get(cv::CAP_PROP_FPS) &lt;&lt; &quot;\n&quot;;
+  std::cout &lt;&lt; &quot;format =&quot; &lt;&lt; cap.get(cv::CAP_PROP_FORMAT) &lt;&lt; &quot;\n&quot;;
+
+  cv::namedWindow(&quot;filtroespacial&quot;, cv::WINDOW_NORMAL);
+  cv::namedWindow(&quot;original&quot;, cv::WINDOW_NORMAL);
+
+  mask = cv::Mat(3, 3, CV_32F, media);
+  absolut = 1;  // calcs abs of the image
+
+  for (;;) {
+    cap &gt;&gt; frame;  // get a new frame from camera
+    cv::cvtColor(frame, framegray, cv::COLOR_BGR2GRAY);
+    cv::flip(framegray, framegray, 1);
+    cv::imshow(&quot;original&quot;, framegray);
+    framegray.convertTo(frame32f, CV_32F);
+    cv::filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
+                 cv::Point(1, 1), 0);
+    if (absolut) {
+      frameFiltered = cv::abs(frameFiltered);
+    }
+
+    frameFiltered.convertTo(result, CV_8U);
+
+    cv::imshow(&quot;filtroespacial&quot;, result);
+
+    key = (char)cv::waitKey(10);
+    if (key == 27) break;  // esc pressed!
+    switch (key) {
+      case &#x27;a&#x27;:
+        absolut = !absolut;
+        break;
+      case &#x27;m&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, media);
+        printmask(mask);
+        break;
+      case &#x27;g&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, gauss);
+        printmask(mask);
+        break;
+      case &#x27;h&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, horizontal);
+        printmask(mask);
+        break;
+      case &#x27;v&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, vertical);
+        printmask(mask);
+        break;
+      case &#x27;l&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, laplacian);
+        printmask(mask);
+        break;
+        case &#x27;p&#x27;:
+        mask = cv::Mat(5, 5, CV_32F, laplgauss);
+        printmask(mask);
+        break;
+      case &#x27;b&#x27;:
+        mask = cv::Mat(3, 3, CV_32F, boost);
+        break;
+      default:
+        break;
+    }
+  }
+  return 0;
+}</code></pre><hr id="f1b477ad-7408-4ff7-8c4a-2a18404df661"/><p id="66491ecf-5367-4a49-a34a-fd7d4931cdd7" class="">
+</p></div></article></body></html>
