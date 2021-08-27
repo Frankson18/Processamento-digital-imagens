@@ -1,7 +1,9 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
-void printmask(cv::Mat &m) {
+using namespace cv;
+
+void printmask(Mat &m) {
   for (int i = 0; i < m.size().height; i++) {
     for (int j = 0; j < m.size().width; j++) {
       std::cout << m.at<float>(i, j) << ",";
@@ -11,7 +13,7 @@ void printmask(cv::Mat &m) {
 }
 
 int main(int, char **) {
-  cv::VideoCapture cap;  // open the default camera
+  VideoCapture cap;  // open the default camera
   float media[] = {0.1111, 0.1111, 0.1111, 0.1111, 0.1111,
                    0.1111, 0.1111, 0.1111, 0.1111};
   float gauss[] = {0.0625, 0.125,  0.0625, 0.125, 0.25,
@@ -23,9 +25,9 @@ int main(int, char **) {
   float laplgauss [] ={0,0,-1,0,0,0,-1,-2,-1,0,-1,-2,16,-2,-1,
                       0,-1,-2,-1,0,0,0,-1,0,0};
 
-  cv::Mat frame, framegray, frame32f, frameFiltered;
-  cv::Mat mask(3, 3, CV_32F), mask_scale;
-  cv::Mat result;
+  Mat frame, framegray, frame32f, frameFiltered;
+  Mat mask(3, 3, CV_32F), mask_scale;
+  Mat result;
   double width, height;
   int absolut;
   char key;
@@ -35,31 +37,31 @@ int main(int, char **) {
   if (!cap.isOpened())  // check if we succeeded
     return -1;
 
-  cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
-  cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
-  width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
-  height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
+  cap.set(CAP_PROP_FRAME_WIDTH, 640);
+  cap.set(CAP_PROP_FRAME_HEIGHT, 480);
+  width = cap.get(CAP_PROP_FRAME_WIDTH);
+  height = cap.get(CAP_PROP_FRAME_HEIGHT);
   std::cout << "largura=" << width << "\n";
   ;
   std::cout << "altura =" << height << "\n";
   ;
-  std::cout << "fps    =" << cap.get(cv::CAP_PROP_FPS) << "\n";
-  std::cout << "format =" << cap.get(cv::CAP_PROP_FORMAT) << "\n";
+  std::cout << "fps    =" << cap.get(CAP_PROP_FPS) << "\n";
+  std::cout << "format =" << cap.get(CAP_PROP_FORMAT) << "\n";
 
-  cv::namedWindow("filtroespacial", cv::WINDOW_NORMAL);
-  cv::namedWindow("original", cv::WINDOW_NORMAL);
+  namedWindow("filtroespacial", WINDOW_NORMAL);
+  namedWindow("original", WINDOW_NORMAL);
 
-  mask = cv::Mat(3, 3, CV_32F, media);
+  mask = Mat(3, 3, CV_32F, media);
   absolut = 1;  // calcs abs of the image
 
   for (;;) {
     cap >> frame;  // get a new frame from camera
-    cv::cvtColor(frame, framegray, cv::COLOR_BGR2GRAY);
-    cv::flip(framegray, framegray, 1);
-    cv::imshow("original", framegray);
+    cvtColor(frame, framegray, cv::COLOR_BGR2GRAY);
+    flip(framegray, framegray, 1);
+    imshow("original", framegray);
     framegray.convertTo(frame32f, CV_32F);
-    cv::filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
-                 cv::Point(1, 1), 0);
+    filter2D(frame32f, frameFiltered, frame32f.depth(), mask,
+                 Point(1, 1), 0);
     if (absolut) {
       frameFiltered = cv::abs(frameFiltered);
     }
